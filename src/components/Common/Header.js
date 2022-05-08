@@ -2,8 +2,8 @@ import { Avatar, Box, IconButton } from "@mui/material";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ENFlag from "../assets/img/ic_flag_en.svg";
-import AvatarDefault from "../assets/img/avatar_default.jpg";
+import ENFlag from "../../assets/img/ic_flag_en.svg";
+import AvatarDefault from "../../assets/img/avatar_default.jpg";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({

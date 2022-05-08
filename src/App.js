@@ -2,7 +2,8 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/Common/Header";
+import PageNotFound from "./components/Common/PageNotFound";
 import BlogPage from "./features/Blog";
 import DashboardPage from "./features/Dashboard";
 import ProductPage from "./features/Product";
@@ -50,6 +51,7 @@ function App() {
             <Route path="/users/*" element={<UserPage />} />
             <Route path="/products" element={<ProductPage />} />
             <Route path="/blogs" element={<BlogPage />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Box>
       </Box>

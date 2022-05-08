@@ -8,6 +8,7 @@ function UserPage() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="add" element={<AddEditPage />} />
+      <Route path=":idUser" element={<AddEditPage />} />
     </Routes>
   );
 }

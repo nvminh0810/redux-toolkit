@@ -1,9 +1,12 @@
-import { Box, Button, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import React from "react";
-import UserTable from "../components/UserTable";
 import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, Paper, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import UserFilter from "../components/UserFilter";
+import UserTable from "../components/UserTable";
+import { fetchUser } from "../userSlice";
 
 const useStyles = makeStyles({
   root: {},
@@ -18,12 +21,22 @@ const useStyles = makeStyles({
     fontWeight: 600,
     backgroundColor: "#2065d1",
   },
+  userFilter: {
+    padding: 20,
+  },
   table: {},
 });
 
 function MainPage() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const users = useSelector((state) => state.user.users);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
 
   const handleAddUser = () => {
     navigate("add");
@@ -45,8 +58,11 @@ function MainPage() {
           New User
         </Button>
       </Box>
-      <Box>
-        <UserTable />
+      <Box component={Paper}>
+        <Box className={classes.userFilter}>
+          <UserFilter />
+        </Box>
+        <UserTable users={users} />
       </Box>
     </Box>
   );

@@ -11,7 +11,7 @@ function SelectField(props) {
         name={name}
         label={label}
         onChange={onChange}
-        defaultValue={defaultValue}
+        value={defaultValue}
       >
         {options.map((option, idx) => (
           <MenuItem key={idx} value={option}>

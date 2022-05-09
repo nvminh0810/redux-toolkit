@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://6274d242345e1821b22fffaa.mockapi.io/api",
+  baseURL: "http://js-post-api.herokuapp.com/api/",
 });
 
 axiosClient.interceptors.request.use(

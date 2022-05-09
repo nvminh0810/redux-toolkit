@@ -1,57 +1,57 @@
-import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import {
+  IconButton,
+  LinearProgress,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  IconButton,
-  LinearProgress,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteUser } from "../userSlice";
 import { useNavigate } from "react-router-dom";
+import { deleteStudent } from "../studentSlice";
 
-export default function UserTable({ users }) {
+export default function StudentTable({ students, citiesMap }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loading = useSelector((state) => state.user.loading);
 
-  const handleOnUpdate = (user) => {
-    navigate(`/users/${user.id}`, {
-      state: user,
+  const handleOnUpdate = (student) => {
+    navigate(`/students/${student.id}`, {
+      state: student,
     });
   };
 
-  const handleOnDelete = (userId) => {
-    dispatch(deleteUser(userId));
+  const handleOnDelete = (studentId) => {
+    dispatch(deleteStudent(studentId));
   };
 
-  const renderUsers = (users) => {
-    if (users && users.length > 0) {
-      return users.map((user) => (
+  const renderStudents = (students) => {
+    if (students && students.length > 0 && Object.keys(citiesMap).length > 0) {
+      return students.map((student) => (
         <TableRow
-          key={user.name}
+          key={student.id}
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <TableCell component="th" scope="row">
-            {user.name}
+            {student.name}
           </TableCell>
-          <TableCell>{user.company}</TableCell>
-          <TableCell>{user.role}</TableCell>
-          <TableCell>{user.verified ? "Yes" : "No"}</TableCell>
-          <TableCell>{user.status ? "Actived" : "Banned"}</TableCell>
+          <TableCell>{student.age}</TableCell>
+          <TableCell>{student.mark}</TableCell>
+          <TableCell>{student.gender}</TableCell>
+          <TableCell>
+            {citiesMap[student.city] ? citiesMap[student.city].name : ""}
+          </TableCell>
           <TableCell align="center">
             <IconButton
               aria-label="eidt"
               size="small"
               color="success"
               onClick={() => {
-                handleOnUpdate(user);
+                handleOnUpdate(student);
               }}
             >
               <ModeEditIcon />
@@ -61,7 +61,7 @@ export default function UserTable({ users }) {
               size="small"
               color="error"
               onClick={() => {
-                handleOnDelete(user.id);
+                handleOnDelete(student.id);
               }}
             >
               <DeleteIcon />
@@ -73,20 +73,19 @@ export default function UserTable({ users }) {
   };
 
   return (
-    <TableContainer>
-      {loading && <LinearProgress />}
+    <TableContainer sx={{ maxHeight: 440 }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Company</TableCell>
-            <TableCell>Role</TableCell>
-            <TableCell>Verified</TableCell>
-            <TableCell>Status</TableCell>
+            <TableCell>Age</TableCell>
+            <TableCell>Mark</TableCell>
+            <TableCell>Gender</TableCell>
+            <TableCell>City</TableCell>
             <TableCell align="center">Options</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{renderUsers(users)}</TableBody>
+        <TableBody>{renderStudents(students)}</TableBody>
       </Table>
     </TableContainer>
   );

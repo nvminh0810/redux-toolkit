@@ -4,11 +4,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Common/Header";
 import PageNotFound from "./components/Common/PageNotFound";
-import BlogPage from "./features/Blog";
-import DashboardPage from "./features/Dashboard";
-import ProductPage from "./features/Product";
 import Sidebar from "./features/Sidebar";
-import UserPage from "./features/User";
+import StudentPage from "./features/Student";
 
 const useStyles = makeStyles({
   root: {
@@ -47,10 +44,8 @@ function App() {
         </Box>
         <Box className={classes.mainContent}>
           <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/users/*" element={<UserPage />} />
-            <Route path="/products" element={<ProductPage />} />
-            <Route path="/blogs" element={<BlogPage />} />
+            <Route path="/students/*" element={<StudentPage />} />
+            <Route path="/cities/*" element={<StudentPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Box>

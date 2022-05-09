@@ -12,12 +12,7 @@ function RadioField(props) {
   return (
     <FormControl fullWidth style={{ marginBottom: 15 }}>
       <FormLabel>{label}</FormLabel>
-      <RadioGroup
-        row
-        name={name}
-        onChange={onChange}
-        defaultValue={defaultValue}
-      >
+      <RadioGroup row name={name} onChange={onChange} value={defaultValue}>
         {options.map((option, idx) => (
           <FormControlLabel
             key={idx}

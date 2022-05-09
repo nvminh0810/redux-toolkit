@@ -1,7 +1,5 @@
 import GroupIcon from "@mui/icons-material/Group";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import ArticleIcon from "@mui/icons-material/Article";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -36,33 +34,13 @@ function ListPage() {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="/users" className={classes.link}>
+          <Link to="/students" className={classes.link}>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
-                <ListItemText primary="User" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="/products" className={classes.link}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InventoryIcon />
-                </ListItemIcon>
-                <ListItemText primary="Product" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="/blogs" className={classes.link}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <ArticleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Blog" />
+                <ListItemText primary="Student" />
               </ListItemButton>
             </ListItem>
           </Link>

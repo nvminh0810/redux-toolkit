@@ -1,24 +1,33 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../../../components/FormFields/InputField";
 import RadioField from "../../../components/FormFields/RadioField";
 import SelectField from "../../../components/FormFields/SelecteField";
 
-function UserForm({ onSubmit, user }) {
-  const [formValues, setFormValues] = useState({
+function StudentForm({ onSubmit, student }) {
+  const initValues = {
     name: "",
     company: "",
     gender: "Male",
     role: "Hr Manager",
     verified: false,
     status: false,
-  });
+  };
+  const [formValues, setFormValues] = useState(initValues);
+
+  useEffect(() => {
+    if (student) {
+      setFormValues(student);
+    } else {
+      setFormValues(initValues);
+    }
+  }, [student]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     onSubmit({
       formValues,
-      type: user ? "edit" : "add",
+      type: student ? "edit" : "add",
     });
   };
 
@@ -35,25 +44,31 @@ function UserForm({ onSubmit, user }) {
       <InputField
         name="name"
         label="Name"
-        value={user ? user.name : formValues.name}
+        value={formValues.name}
         onChange={handleFieldChange}
       />
       <InputField
-        name="company"
-        label="Company"
-        value={user ? user.company : formValues.company}
+        name="age"
+        label="Age"
+        value={formValues.age}
+        onChange={handleFieldChange}
+      />
+      <InputField
+        name="mark"
+        label="Mark"
+        value={formValues.mark}
         onChange={handleFieldChange}
       />
       <RadioField
         name="gender"
         label="Gender"
         onChange={handleFieldChange}
-        options={["Male", "Female", "Other"]}
-        defaultValue={user ? user.gender : formValues.gender}
+        options={["male", "female"]}
+        defaultValue={formValues.gender}
       />
       <SelectField
-        name="role"
-        label="Role"
+        name="city"
+        label="City"
         options={[
           "UI/UX Designer",
           "Project Manager",
@@ -61,14 +76,14 @@ function UserForm({ onSubmit, user }) {
           "Full Stack Developer",
         ]}
         onChange={handleFieldChange}
-        defaultValue={user ? user.role : formValues.role}
+        defaultValue={formValues.city}
       />
 
       <Button variant="contained" type="submit">
-        {user ? "Update" : "Add"}
+        {student ? "Update" : "Add"}
       </Button>
     </form>
   );
 }
 
-export default UserForm;
+export default StudentForm;

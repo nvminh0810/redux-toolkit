@@ -1,13 +1,12 @@
+import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import UserForm from "../components/UserForm";
-import { addUser } from "../userSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import StudentForm from "../components/StudentForm";
+import { addStudent, updateStudent } from "../studentSlice";
 
 const useStyles = makeStyles({
-  root: {},
   form: {
     width: 600,
   },
@@ -19,20 +18,22 @@ function AddEditPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleFormSubmit = ({ formValues, type }) => {
-    dispatch(addUser(formValues));
-    navigate("/users");
+  const handleFormSubmit = async ({ formValues, type }) => {
+    if (type === "edit") {
+      await dispatch(updateStudent(formValues));
+    } else {
+      await dispatch(addStudent(formValues));
+    }
+    navigate("/students");
   };
-
-  const { state } = location;
 
   return (
     <Box className={classes.root}>
       <Typography variant="h4" style={{ marginBottom: 30 }}>
-        {state ? "EDIT" : "ADD NEW USER"}
+        {location.state ? "EDIT" : "ADD NEW STUDENT"}
       </Typography>
       <Box className={classes.form}>
-        <UserForm onSubmit={handleFormSubmit} user={state} />
+        <StudentForm onSubmit={handleFormSubmit} student={location.state} />
       </Box>
     </Box>
   );

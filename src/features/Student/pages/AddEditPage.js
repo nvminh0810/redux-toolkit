@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import StudentForm from "../components/StudentForm";
 import { addStudent, updateStudent } from "../studentSlice";
@@ -18,6 +18,8 @@ function AddEditPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const cities = useSelector((state) => state.city.cities);
+
   const handleFormSubmit = async ({ formValues, type }) => {
     if (type === "edit") {
       await dispatch(updateStudent(formValues));
@@ -33,7 +35,11 @@ function AddEditPage() {
         {location.state ? "EDIT" : "ADD NEW STUDENT"}
       </Typography>
       <Box className={classes.form}>
-        <StudentForm onSubmit={handleFormSubmit} student={location.state} />
+        <StudentForm
+          onSubmit={handleFormSubmit}
+          student={location.state}
+          cities={cities}
+        />
       </Box>
     </Box>
   );

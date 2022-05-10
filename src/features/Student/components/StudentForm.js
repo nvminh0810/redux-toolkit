@@ -4,14 +4,12 @@ import InputField from "../../../components/FormFields/InputField";
 import RadioField from "../../../components/FormFields/RadioField";
 import SelectField from "../../../components/FormFields/SelecteField";
 
-function StudentForm({ onSubmit, student }) {
+function StudentForm({ onSubmit, student, cities }) {
   const initValues = {
     name: "",
     company: "",
-    gender: "Male",
-    role: "Hr Manager",
-    verified: false,
-    status: false,
+    gender: "male",
+    city: "hcm",
   };
   const [formValues, setFormValues] = useState(initValues);
 
@@ -69,12 +67,7 @@ function StudentForm({ onSubmit, student }) {
       <SelectField
         name="city"
         label="City"
-        options={[
-          "UI/UX Designer",
-          "Project Manager",
-          "Hr Manager",
-          "Full Stack Developer",
-        ]}
+        options={cities}
         onChange={handleFieldChange}
         defaultValue={formValues.city}
       />

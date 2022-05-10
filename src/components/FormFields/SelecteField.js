@@ -14,8 +14,8 @@ function SelectField(props) {
         value={defaultValue}
       >
         {options.map((option, idx) => (
-          <MenuItem key={idx} value={option}>
-            {option}
+          <MenuItem key={idx} value={option.code}>
+            {option.name}
           </MenuItem>
         ))}
       </Select>

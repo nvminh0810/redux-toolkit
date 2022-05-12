@@ -1,56 +1,37 @@
-import { Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Common/Header";
-import PageNotFound from "./components/Common/PageNotFound";
-import Sidebar from "./features/Sidebar";
-import StudentPage from "./features/Student";
-
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    flex: 1,
-    minHeight: "100vh",
-    backgroundColor: "#f9fafb",
-  },
-  sidebar: {
-    flex: 1,
-  },
-  main: {
-    flex: 6,
-  },
-  header: {
-    minHeight: 92,
-    padding: "0 42px",
-  },
-  mainContent: {
-    width: "70%",
-    margin: "auto",
-  },
-});
+import AuthLayout from "./components/Layouts/AuthLayout";
+import DefaultLayout from "./components/Layouts/DefaultLayout";
+import { publicRoutes } from "./routes";
 
 function App() {
-  const classes = useStyles();
+  const findLayout = ({ auth, empty }) => {
+    let Layout = DefaultLayout;
+    if (auth) {
+      Layout = AuthLayout;
+    } else if (empty) {
+      Layout = Fragment;
+    }
+    return Layout;
+  };
 
   return (
-    <Box className={classes.root}>
-      <Box className={classes.sidebar}>
-        <Sidebar />
-      </Box>
-      <Box className={classes.main}>
-        <Box className={classes.header}>
-          <Header />
-        </Box>
-        <Box className={classes.mainContent}>
-          <Routes>
-            <Route path="/students/*" element={<StudentPage />} />
-            <Route path="/cities/*" element={<StudentPage />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Box>
-      </Box>
-    </Box>
+    <Routes>
+      {publicRoutes.map(({ Component, ...props }, index) => {
+        const Layout = findLayout(props);
+        return (
+          <Route
+            {...props}
+            key={index}
+            element={
+              <Layout>
+                <Component />
+              </Layout>
+            }
+          />
+        );
+      })}
+    </Routes>
   );
 }
 

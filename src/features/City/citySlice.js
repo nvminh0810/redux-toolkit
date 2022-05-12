@@ -39,4 +39,5 @@ export const selectCitiesMap = createSelector(selectCities, (cities) =>
 export const {} = citySlice.actions;
 
 // Reducer
-export default citySlice.reducer;
+const cityReducer = citySlice.reducer;
+export default cityReducer;

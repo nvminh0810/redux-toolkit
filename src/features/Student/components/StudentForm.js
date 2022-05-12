@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import InputField from "../../../components/FormFields/InputField";
-import RadioField from "../../../components/FormFields/RadioField";
-import SelectField from "../../../components/FormFields/SelecteField";
+import InputField from "components/FormFields/InputField";
+import RadioField from "components/FormFields/RadioField";
+import SelectField from "components/FormFields/SelecteField";
 
 function StudentForm({ onSubmit, student, cities }) {
   const initValues = {

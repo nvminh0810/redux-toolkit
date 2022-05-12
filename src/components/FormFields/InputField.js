@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import React from "react";
 
 function InputField(props) {
-  const { label, name, value, onChange } = props;
+  const { label, name, value, onChange, onBlur, size = "small", error } = props;
 
   return (
     <TextField
@@ -10,10 +10,12 @@ function InputField(props) {
       name={name}
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
+      helperText={error}
       fullWidth
-      size="small"
+      size={size}
       variant="outlined"
-      style={{ marginBottom: 15 }}
+      style={{ marginBottom: 15, marginTop: 15 }}
     />
   );
 }

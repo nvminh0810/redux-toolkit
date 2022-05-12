@@ -1,10 +1,10 @@
-import { Avatar, Box, IconButton } from "@mui/material";
-import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ENFlag from "../../assets/img/ic_flag_en.svg";
-import AvatarDefault from "../../assets/img/avatar_default.jpg";
+import SearchIcon from "@mui/icons-material/Search";
+import { Avatar, Box, IconButton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import AvatarDefault from "assets/img/avatar_default.jpg";
+import ENFlag from "assets/img/ic_flag_en.svg";
+import React from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +37,7 @@ function Header() {
       </Box>
       <Box className={classes.iconGroup}>
         <IconButton>
-          <img className={classes.flag} src={ENFlag} />
+          <img alt="EnglandFlag" className={classes.flag} src={ENFlag} />
         </IconButton>
         <IconButton style={{ margin: "0 5px" }}>
           <NotificationsIcon />

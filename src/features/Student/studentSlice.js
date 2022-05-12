@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import studentApi from "../../api/studentApi";
+import studentApi from "api/studentApi";
 
 const initialState = {
   students: [],
@@ -70,4 +70,5 @@ export const studentSlice = createSlice({
 
 export const { setFilters } = studentSlice.actions;
 
-export default studentSlice.reducer;
+const studentReducer = studentSlice.reducer;
+export default studentReducer;

@@ -8,7 +8,7 @@ import { selectCitiesMap } from "../../City/citySlice";
 import StudentFilter from "../components/StudentFilter";
 import StudentPagination from "../components/StudentPagination";
 import StudentTable from "../components/StudentTable";
-import { fetchStudent, setFilters } from "../studentSlice";
+import { deleteStudent, fetchStudent, setFilters } from "../studentSlice";
 
 const useStyles = makeStyles({
   root: {},
@@ -62,6 +62,16 @@ function MainPage() {
     dispatch(setFilters({ ...filters, name_like }));
   };
 
+  const handleOnUpdate = (student) => {
+    navigate(`/students/${student.id}`, {
+      state: student,
+    });
+  };
+
+  const handleOnDelete = (studentId) => {
+    dispatch(deleteStudent(studentId));
+  };
+
   return (
     <Box className={classes.root}>
       <Box className={classes.header}>
@@ -85,7 +95,12 @@ function MainPage() {
         </Box>
         {students && students.length > 0 ? (
           <Fragment>
-            <StudentTable students={students} citiesMap={citiesMap} />
+            <StudentTable
+              students={students}
+              citiesMap={citiesMap}
+              onDelete={handleOnDelete}
+              onUpdate={handleOnUpdate}
+            />
             <StudentPagination
               pagination={pagination}
               onPageChange={handlePageChange}

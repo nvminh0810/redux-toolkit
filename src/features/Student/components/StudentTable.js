@@ -2,7 +2,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import {
   IconButton,
-  LinearProgress,
   Table,
   TableBody,
   TableCell,
@@ -11,24 +10,12 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { deleteStudent } from "../studentSlice";
-
-export default function StudentTable({ students, citiesMap }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleOnUpdate = (student) => {
-    navigate(`/students/${student.id}`, {
-      state: student,
-    });
-  };
-
-  const handleOnDelete = (studentId) => {
-    dispatch(deleteStudent(studentId));
-  };
-
+export default function StudentTable({
+  students,
+  citiesMap,
+  onUpdate,
+  onDelete,
+}) {
   const renderStudents = (students) => {
     if (students && students.length > 0 && Object.keys(citiesMap).length > 0) {
       return students.map((student) => (
@@ -51,7 +38,7 @@ export default function StudentTable({ students, citiesMap }) {
               size="small"
               color="success"
               onClick={() => {
-                handleOnUpdate(student);
+                onUpdate(student);
               }}
             >
               <ModeEditIcon />
@@ -61,7 +48,7 @@ export default function StudentTable({ students, citiesMap }) {
               size="small"
               color="error"
               onClick={() => {
-                handleOnDelete(student.id);
+                onDelete(student.id);
               }}
             >
               <DeleteIcon />

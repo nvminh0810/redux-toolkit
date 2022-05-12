@@ -10,35 +10,36 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
+    borderTop: "1px solid #e0e0e0",
   },
-  pageNumbers: {},
+  iconsPageChange: {},
 });
 
 function StudentPagination({ pagination, onPageChange }) {
   const classes = useStyles();
   const { _page, _limit, _totalRows } = pagination;
-
   const totalPage = Math.ceil(_totalRows / _limit);
 
   return (
     <Box className={classes.root}>
-      <IconButton
-        onClick={() => {
-          onPageChange(_page - 1);
-        }}
-        disabled={_page <= 1}
-      >
-        <ChevronLeftIcon />
-      </IconButton>
-
-      <IconButton
-        onClick={() => {
-          onPageChange(_page + 1);
-        }}
-        disabled={_page >= totalPage}
-      >
-        <ChevronRightIcon />
-      </IconButton>
+      <Box className={classes.iconsPageChange}>
+        <IconButton
+          onClick={() => {
+            onPageChange(_page - 1);
+          }}
+          disabled={_page <= 1}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+        <IconButton
+          onClick={() => {
+            onPageChange(_page + 1);
+          }}
+          disabled={_page >= totalPage}
+        >
+          <ChevronRightIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 }
